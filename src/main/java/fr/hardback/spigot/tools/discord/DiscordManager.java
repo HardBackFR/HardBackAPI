@@ -1,0 +1,27 @@
+package fr.hardback.spigot.tools.discord;
+
+import java.awt.*;
+import java.io.IOException;
+
+public class DiscordManager {
+
+    private static final String ICON_URL = "https://camo.githubusercontent.com/8400b2b3a3dd8a6a400470ec66783783d295119289f2f2dc05cfa7fa403ae5af/68747470733a2f2f692e6962622e636f2f705051683051372f66617669636f6e2e706e67";
+
+    public static void send(String message) {
+        try {
+            DiscordWebhook discordWebhook = new DiscordWebhook("https://discord.com/api/webhooks/943136485580894218/piqKPXQFyseV24QuAbjsNPD9Z2s0OpgeUovl4EKDbCKTyW4uoicBsrTK6r7byJHnA82B");
+            discordWebhook.setAvatarUrl(ICON_URL);
+            discordWebhook.setUsername("HardBackAPI | Minecraft");
+            discordWebhook.setTts(false);
+            discordWebhook.addEmbed(new DiscordWebhook.EmbedObject()
+                    .setAuthor("HardBackAPI", "https://hardback.fr", ICON_URL)
+                    .setDescription(message)
+                    .setColor(Color.ORANGE)
+                    .setFooter("API faite par KIZAFOX pour le serveur HardBack", ICON_URL)
+                    .setUrl("https://hardback.fr"));
+            discordWebhook.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

@@ -1,0 +1,6 @@
+name: HardBack
+version: '${project.version}'
+main: fr.hardback.bungee.HardBack
+author: KIZAFOX
+description: '${project.description}'
+website: '${project.url}'
