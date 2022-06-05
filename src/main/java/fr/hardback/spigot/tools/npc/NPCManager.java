@@ -29,7 +29,7 @@ public class NPCManager {
         final EntityPlayer entityPlayer = new EntityPlayer(minecraftServer, minecraftServer.getWorldServer(0), gameProfile, new PlayerInteractManager(minecraftServer.getWorldServer(0)));
         entityPlayer.setPosition(npc.getX(), npc.getY(), npc.getZ());
 
-        final Location location = new Location(Bukkit.getWorld("world"), npc.getX(), npc.getY(), npc.getZ() - 0.25);
+        final Location location = new Location(Bukkit.getWorld("world"), npc.getX(), npc.getY(), npc.getZ() - 0.15);
         final Vector direction = location.getDirection();
         final Location front = location.add(direction);
         final ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(front, EntityType.ARMOR_STAND);
@@ -57,9 +57,7 @@ public class NPCManager {
         });
 
         Bukkit.getWorlds().forEach(worlds -> worlds.getEntities().forEach(entities -> {
-           if(entities instanceof ArmorStand & entities.getCustomName().equalsIgnoreCase(npc.getName())){
-               entities.remove();
-           }
+            if(entities instanceof ArmorStand & entities.getCustomName().equalsIgnoreCase(npc.getName())) entities.remove();
         }));
     }
 }
