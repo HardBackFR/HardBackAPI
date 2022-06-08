@@ -26,10 +26,11 @@ public class AccountProvider {
                                 "'0.0'," +
                                 "'0'," +
                                 "'" + date + "')");
-
                         DatabaseManager.REDIS.setAccountData(uuid, new AccountData(name, RankUnit.Joueur, 0.0, 0.0, 0, date));
+                        System.out.println("CREATE");
                     }
                     this.loadAccount(uuid);
+                    System.out.println("LOAD IN SAVE");
                 }catch (SQLException e){
                     e.printStackTrace();
                 }
@@ -53,6 +54,7 @@ public class AccountProvider {
                 "mysteryKeys='" + mysteryKeys + "'," +
                 "createdAt='" + createdAt + "' " +
                 "WHERE uuid='" + uuid + "'");
+        System.out.println("SAVE");
     }
 
     public void loadAccounts(){
@@ -69,6 +71,7 @@ public class AccountProvider {
                         Date createdAt = rs.getDate("createdAt");
 
                         DatabaseManager.REDIS.setAccountData(uuid, new AccountData(name, rank, credits, coins, mysteryKeys, createdAt));
+                        System.out.println("LOAD ACCOUNTS");
                     }
                 }
             }catch (SQLException e){
@@ -89,6 +92,7 @@ public class AccountProvider {
                         Date createdAt = rs.getDate("createdAt");
 
                         DatabaseManager.REDIS.setAccountData(uuid, new AccountData(name, rank, credits, coins, mysteryKeys, createdAt));
+                        System.out.println("LOAD");
                     }
                 }catch (SQLException e){
                     e.printStackTrace();

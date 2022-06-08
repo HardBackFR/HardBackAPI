@@ -34,6 +34,8 @@ public class HardBack extends Plugin {
     @Override
     public void onDisable() {
         DatabaseManager.closeAllConnection();
+        DiscordManager.send("HardBackProxy has been disabled ! (Version: " + this.getDescription().getVersion() + ")");
+        ProxyServer.getInstance().getConsole().sendMessage(new TextComponent(PREFIX + ChatColor.GREEN + "HardBack has been disabled ! (Version: " + this.getDescription().getVersion() + ")"));
     }
 
     public static HardBack get() {

@@ -34,13 +34,11 @@ public class PlayerListeners implements Listener {
                 event.getPlayer().disconnect(new TextComponent(HardBack.PREFIX + ChatColor.RED + "Une maintenance est en cours.. Merci de contacter un Admin en cas de problème !"));
             }
         }
-        DiscordManager.send(event.getPlayer().getName() + " a rejoint le proxy !");
     }
 
     @EventHandler (priority = EventPriority.HIGHEST)
     public void onLogout(PlayerDisconnectEvent event){
         DatabaseManager.accountProvider.saveAccount(event.getPlayer().getUniqueId());
-        DiscordManager.send(event.getPlayer().getName() + " a quitté le proxy !");
     }
 
     @EventHandler (priority = EventPriority.HIGHEST)

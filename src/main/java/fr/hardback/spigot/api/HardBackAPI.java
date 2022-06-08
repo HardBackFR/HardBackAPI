@@ -28,7 +28,7 @@ public abstract class HardBackAPI {
      * @param text - Message of log
      */
     public void log(Level level, String text){
-        this.plugin.getLogger().log(level, text);
+        plugin.getLogger().log(level, text);
     }
 
     public abstract String getServerName();
@@ -40,7 +40,7 @@ public abstract class HardBackAPI {
     }
 
     public JavaPlugin getPlugin() {
-        return plugin;
+        return this.plugin;
     }
 }
 
