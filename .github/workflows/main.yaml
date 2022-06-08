@@ -20,4 +20,4 @@ jobs:
       - name: deploy
         run:
           sshpass -e ssh -o stricthostkeychecking=no ${{ secrets.APP_USER }}@${{ secrets.APP_HOST }}
-          "cd /home/minecraft-servers/proxy/plugins/ && rm HardBack-1.1-SNAPSHOT.jar && wget https://github.com/HardBackFR/HardBackAPI/raw/main/target/HardBack-1.1-SNAPSHOT.jar"
+          "cd /home/minecraft/servers/proxy/plugins/ && rm HardBack-1.1-SNAPSHOT.jar && wget https://github.com/HardBackFR/HardBackAPI/raw/main/target/HardBack-1.1-SNAPSHOT.jar"
