@@ -9,7 +9,7 @@ public class DiscordManager {
 
     public static void send(String message) {
         try {
-            DiscordWebhook discordWebhook = new DiscordWebhook("https://discord.com/api/webhooks/943136281523810334/QDs2SK9W3kxZZmsvyXpr8UjWjzYbydIsCFiDycGmHCGV331FAk3-KXhlzFnwJgkl1Bq6");
+            DiscordWebhook discordWebhook = new DiscordWebhook("https://discord.com/api/webhooks/984498998528335943/EoqHJ5JRXkJKqbF_9q8ZiheV0P71Tit5FWoC1P5Gl1NZWfXsO-Qmsg1CU560YZPLzZw4");
             discordWebhook.setAvatarUrl(ICON_URL);
             discordWebhook.setUsername("HardBackAPI | Minecraft");
             discordWebhook.setTts(false);

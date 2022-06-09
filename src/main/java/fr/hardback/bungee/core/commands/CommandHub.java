@@ -24,10 +24,10 @@ public class CommandHub extends Command {
 
 		final ProxiedPlayer player = (ProxiedPlayer) sender;
 
-		if(player.getServer().getInfo().getName().equals("hub1")){
+		if(player.getServer().getInfo().getName().equals("hub")){
 			MessageUtils.sendMessage((ProxiedPlayer) sender, ChatColor.RED + "Vous êtes déjà sur le Hub !");
 		}else{
-			this.instance.getProxy().getScheduler().schedule(this.instance, () -> player.connect(this.instance.getProxy().getServerInfo("hub1")), 1L, TimeUnit.MICROSECONDS);
+			this.instance.getProxy().getScheduler().schedule(this.instance, () -> player.connect(this.instance.getProxy().getServerInfo("hub")), 1L, TimeUnit.MICROSECONDS);
 		}
 	}
 }
