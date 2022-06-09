@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 
 public enum NPC {
 
-    NAVIGATEUR(ChatColor.YELLOW + "" + ChatColor.BOLD + "Le Navigateur", "KIZAFOX", -0.562, 100.0, 0.169);
+    NAVIGATEUR(ChatColor.GOLD + "Navigateur", "KIZAFOX", -0.562, 100.0, 0.169);
 
     private final String name, skinName;
     private final double x, y, z;
