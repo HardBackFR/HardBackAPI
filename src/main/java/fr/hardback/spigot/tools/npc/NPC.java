@@ -4,12 +4,12 @@ import org.bukkit.ChatColor;
 
 public enum NPC {
 
-    TEST(ChatColor.BLUE + "NPC Test", "KIZAFOX", 0, 10, 0);
+    NAVIGATEUR(ChatColor.YELLOW + "" + ChatColor.BOLD + "Le Navigateur", "KIZAFOX", -0.562, 100.0, 0.169);
 
     private final String name, skinName;
-    private final int x, y, z;
+    private final double x, y, z;
 
-    NPC(String name, String skinName, int x, int y, int z) {
+    NPC(String name, String skinName, double x, double y, double z) {
         this.name = name;
         this.skinName = skinName;
         this.x = x;
@@ -25,15 +25,15 @@ public enum NPC {
         return skinName;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public int getZ() {
+    public double getZ() {
         return z;
     }
 }
