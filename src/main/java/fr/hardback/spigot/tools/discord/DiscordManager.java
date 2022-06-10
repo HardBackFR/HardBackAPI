@@ -1,5 +1,7 @@
 package fr.hardback.spigot.tools.discord;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.awt.*;
 import java.io.IOException;
 
@@ -9,7 +11,7 @@ public class DiscordManager {
 
     public static void send(String message) {
         try {
-            DiscordWebhook discordWebhook = new DiscordWebhook("https://discord.com/api/webhooks/984498998528335943/EoqHJ5JRXkJKqbF_9q8ZiheV0P71Tit5FWoC1P5Gl1NZWfXsO-Qmsg1CU560YZPLzZw4");
+            DiscordWebhook discordWebhook = new DiscordWebhook(Dotenv.configure().load().get("DISCORD"));
             discordWebhook.setAvatarUrl(ICON_URL);
             discordWebhook.setUsername("HardBackAPI | Minecraft");
             discordWebhook.setTts(false);
