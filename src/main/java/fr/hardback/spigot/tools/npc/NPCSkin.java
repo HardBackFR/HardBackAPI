@@ -14,7 +14,7 @@ import java.net.URL;
 
 public class NPCSkin {
 
-    public String[] getFromPlayer(Player playerBukkit) {
+    public static String[] getFromPlayer(Player playerBukkit) {
         EntityPlayer playerNMS = ((CraftPlayer) playerBukkit).getHandle();
         GameProfile profile = playerNMS.getProfile();
         Property property = profile.getProperties().get("textures").iterator().next();
@@ -23,7 +23,7 @@ public class NPCSkin {
         return new String[] {texture, signature};
     }
 
-    public String[] getFromName(String name) {
+    public static String[] getFromName(String name) {
         try {
             URL url_0 = new URL("https://api.mojang.com/users/profiles/minecraft/" + name);
             InputStreamReader reader_0 = new InputStreamReader(url_0.openStream());
