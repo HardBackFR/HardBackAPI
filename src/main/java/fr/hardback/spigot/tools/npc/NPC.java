@@ -6,7 +6,7 @@ import org.bukkit.Location;
 
 public enum NPC {
 
-    NAVIGATEUR(ChatColor.GOLD + "Navigateur", "KIZAFOX", new Location(Bukkit.getWorld("world"), -0.562, 100.0, 0.169, -178.8f, 3.3f));
+    NAVIGATEUR(ChatColor.GOLD + "Navigateur", "KIZAFOX", new Location(Bukkit.getWorld("world"), -0.477, 100.0, 0.497, -179.8f, 1.6f));
 
     private final String name, skinName;
     private final Location location;
