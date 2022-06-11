@@ -1,6 +1,5 @@
 package fr.hardback.spigot.api;
 
-import fr.hardback.spigot.tools.npc.NPCManager;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,8 +31,6 @@ public abstract class HardBackAPI {
     }
 
     public abstract String getServerName();
-
-    public abstract NPCManager getNPCManager();
 
     public static HardBackAPI get() {
         return instance;
