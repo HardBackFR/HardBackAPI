@@ -10,20 +10,23 @@ import java.util.TreeSet;
 
 public abstract class AbstractNPC {
 
-    protected final JavaPlugin plugin;
-    protected final Player player;
     protected final SortedSet<String> ids;
-    protected final NPCLib npc;
+    protected final NPCLib npcLib;
 
-    public AbstractNPC(JavaPlugin plugin, Player player) {
-        this.plugin = plugin;
-        this.player = player;
-
+    public AbstractNPC(Player player, JavaPlugin plugin) {
         this.ids = new TreeSet<>();
-        this.npc = new NPCLib(plugin);
+        this.npcLib = new NPCLib(plugin);
     }
 
     public abstract void execute(NPCList npc);
 
     public abstract void onNPCInteractEvent(NPCInteractEvent event);
+
+    public SortedSet<String> getIds() {
+        return ids;
+    }
+
+    public NPCLib getNpcLib() {
+        return npcLib;
+    }
 }
