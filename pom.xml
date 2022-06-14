@@ -88,6 +88,12 @@
             <version>2.11.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <!-- Particle -->
+        <dependency>
+            <groupId>xyz.xenondevs</groupId>
+            <artifactId>particle</artifactId>
+            <version>1.8.1</version>
+        </dependency>
         <!-- Dotenv -->
         <dependency>
             <groupId>io.github.cdimascio</groupId>

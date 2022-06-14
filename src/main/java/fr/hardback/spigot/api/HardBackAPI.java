@@ -1,7 +1,5 @@
 package fr.hardback.spigot.api;
 
-import fr.hardback.spigot.tools.npc.NPCManager;
-import fr.hardback.spigot.tools.pets.PetManager;
 import in.ashwanthkumar.slack.webhook.Slack;
 import in.ashwanthkumar.slack.webhook.SlackAttachment;
 import in.ashwanthkumar.slack.webhook.SlackMessage;
