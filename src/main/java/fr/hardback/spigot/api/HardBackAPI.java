@@ -43,10 +43,6 @@ public abstract class HardBackAPI {
 
     public abstract String getServerName();
 
-    public abstract NPCManager getNPCManager();
-
-    public abstract PetManager getPetManager();
-
     public abstract Slack getSlackLogsPublisher();
 
     public void slackLog(Level level, SlackMessage message){

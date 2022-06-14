@@ -7,6 +7,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -16,10 +17,15 @@ import java.util.UUID;
 
 public class PetManager {
 
-    private final Map<UUID, Pig> petsMap =  new HashMap<>();;
+    private final Plugin plugin;
+    private final Map<UUID, Pig> petsMap =  new HashMap<>();
+
+    public PetManager(Plugin plugin) {
+        this.plugin = plugin;
+    }
 
     public void execute(Player player, Pets pets){
-        Bukkit.getScheduler().runTaskAsynchronously(HardBackAPI.get().getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             if(pets.isGround()){
                 Pig pig = (Pig) player.getWorld().spawnEntity(player.getLocation(), EntityType.PIG);
 
