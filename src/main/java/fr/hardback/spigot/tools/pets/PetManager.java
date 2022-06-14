@@ -1,98 +1,46 @@
 package fr.hardback.spigot.tools.pets;
 
-import java.util.stream.Stream;
-
+import fr.hardback.spigot.api.HardBackAPI;
 import fr.hardback.spigot.tools.head.CustomHead;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.block.BlockFace;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-import org.bukkit.plugin.Plugin;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class PetManager {
 
-    private Player player;
-    private final BlockFace[] axis = { BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST };
+    private final Map<UUID, Pig> petsMap =  new HashMap<>();;
 
-    public PetManager(Player player) {
-        this.player = player;
-    }
+    public void execute(Player player, Pets pets){
+        Bukkit.getScheduler().runTaskAsynchronously(HardBackAPI.get().getPlugin(), () -> {
+            if(pets.isGround()){
+                Pig pig = (Pig) player.getWorld().spawnEntity(player.getLocation(), EntityType.PIG);
 
-    public PetManager(){}
+                pig.setCustomName(pets.getName());
+                pig.setCustomNameVisible(true);
+                pig.getEquipment().setHelmet(CustomHead.create(pets.getHeadURL()));
+                pig.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1));
 
-    private BlockFace yawToFace(float yaw, boolean useSubCardinalDirections) {
-        if (useSubCardinalDirections)
-            return axis[Math.round(yaw / 45f) & 0x7].getOppositeFace();
-
-        return axis[Math.round(yaw / 90f) & 0x3].getOppositeFace();
-    }
-
-    public void unloadCosmetic(Pets pet) {
-        Bukkit.getServer().getWorlds().forEach(worlds -> {
-            worlds.getEntities().forEach(entities -> {
-                if(entities instanceof ArmorStand){
-                    if(entities.getName().equalsIgnoreCase(pet.getPrefixColor() + pet.getName())) entities.remove();
-                }
-            });
+                petsMap.put(player.getUniqueId(), pig);
+            }
         });
     }
 
-    public void unloadCosmetic() {
-        Stream.of(Pets.values()).forEach(this::unloadCosmetic);
+    public void remove(Player player){
+        this.petsMap.remove(player.getUniqueId());
     }
 
-    public void loadCosmetic(Pets pet, Plugin plugin) {
-        Bukkit.getScheduler().runTaskLater(plugin, ()->{
-            unloadCosmetic(pet);
-
-            Location location = new Location(player.getWorld(), 0, 0, 0);
-
-            switch (yawToFace(player.getLocation().getYaw(), false)) {
-                case NORTH:
-                    if(pet.isGround()){
-                        location = new Location(player.getWorld(), player.getLocation().getBlockX() + 1, player.getLocation().getBlockY() - pet.ground(), player.getLocation().getBlockZ());
-                    }else{
-                        location = new Location(player.getWorld(), player.getLocation().getBlockX() + 1, player.getLocation().getBlockY(), player.getLocation().getBlockZ());
-                    }
-                    break;
-                case SOUTH:
-                    if(pet.isGround()){
-                        location = new Location(player.getWorld(), player.getLocation().getBlockX() -1, player.getLocation().getBlockY() - pet.ground(), player.getLocation().getBlockZ());
-                    }else{
-                        location = new Location(player.getWorld(), player.getLocation().getBlockX() -1, player.getLocation().getBlockY(), player.getLocation().getBlockZ());
-                    }
-                    break;
-                case WEST:
-                    if(pet.isGround()){
-                        location = new Location(player.getWorld(), player.getLocation().getBlockX(), player.getLocation().getBlockY() - pet.ground(), player.getLocation().getBlockZ() - 1);
-                    }else{
-                        location = new Location(player.getWorld(), player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ() - 1);
-                    }
-                    break;
-                case EAST:
-                    if(pet.isGround()){
-                        location = new Location(player.getWorld(), player.getLocation().getBlockX(), player.getLocation().getBlockY() - pet.ground(), player.getLocation().getBlockZ() + 1);
-                    }else{
-                        location = new Location(player.getWorld(), player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ() + 1);
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            ArmorStand rubicude = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
-            rubicude.setVisible(false);
-            rubicude.setGravity(false);
-            rubicude.setHelmet(CustomHead.create(pet.getHeadURL()));
-            rubicude.setCustomName(pet.getPrefixColor() + pet.getName());
-            rubicude.setCustomNameVisible(true);
-        }, (long) (0.9 * 20));
-    }
-
-    public void loadCosmetic(Plugin plugin) {
-        Stream.of(Pets.values()).forEach(pets -> this.loadCosmetic(pets, plugin));
+    public void onPlayerMove(PlayerMoveEvent event){
+        if(petsMap.containsKey(event.getPlayer().getUniqueId())){
+            Pig pig = this.petsMap.get(event.getPlayer().getUniqueId());
+            pig.teleport(event.getPlayer().getLocation());
+        }
     }
 }

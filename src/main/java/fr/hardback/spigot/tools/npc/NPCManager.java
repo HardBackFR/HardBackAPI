@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class NPCManager {
 
-    public static void setup(NPCLib npcLib, NPCList npcList, Player player){
+    public void setup(NPCLib npcLib, NPCList npcList, Player player){
         NPC npc = npcLib.createNPC(Arrays.asList(npcList.getName(), NPCList.SUB_TITLE));
         npc.setSkin(new Skin(npcList.getTexture(), npcList.getSignature()));
         npc.setLocation(npcList.getLocation());
