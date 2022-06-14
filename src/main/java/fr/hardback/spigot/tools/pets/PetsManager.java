@@ -7,7 +7,10 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftArmorStand;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import xyz.xenondevs.particle.ParticleBuilder;
+import xyz.xenondevs.particle.ParticleEffect;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -32,7 +35,18 @@ public class PetsManager {
         this.armorStand.setVisible(false);
     }
 
-    public void onMove(PlayerMoveEvent event){
+    public void destroy(PlayerInteractAtEntityEvent event){
+        if(event.getRightClicked().getCustomName() == null) return;
+
+        for(Pets pets : Pets.values()){
+            if(event.getRightClicked().getCustomName().contains(pets.getName())) {
+                event.getRightClicked().remove();
+                new ParticleBuilder(ParticleEffect.EXPLOSION_HUGE, event.getRightClicked().getLocation()).setOffsetY(1f).setSpeed(0.1f).display();
+            }
+        }
+    }
+
+    public void tp(PlayerMoveEvent event){
         if(event.getPlayer().getUniqueId() != uuid) return;
 
         Player player = event.getPlayer();
