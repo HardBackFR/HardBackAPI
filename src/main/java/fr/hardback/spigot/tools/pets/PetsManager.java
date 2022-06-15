@@ -41,7 +41,6 @@ public class PetsManager {
         this.armorStand.setHelmet(CustomHead.create(pets.getHeadURL()));
         this.armorStand.setGravity(false);
         this.armorStand.setVisible(false);
-        this.pet.put(this.uuid, this.armorStand);
     }
 
     public void destroy(PlayerInteractAtEntityEvent event){
@@ -50,9 +49,9 @@ public class PetsManager {
 
         for(Pets pets : Pets.values()){
             if(event.getRightClicked().getCustomName().contains(pets.getName())) {
+                this.pet.remove(event.getRightClicked().getUniqueId());
                 event.getRightClicked().remove();
                 new ParticleBuilder(ParticleEffect.EXPLOSION_HUGE, event.getRightClicked().getLocation()).setOffsetY(1f).setSpeed(0.1f).display();
-                this.pet.remove(event.getRightClicked().getUniqueId());
             }
         }
     }
