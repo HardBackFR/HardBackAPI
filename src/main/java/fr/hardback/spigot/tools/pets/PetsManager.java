@@ -21,19 +21,19 @@ import java.util.UUID;
 
 public class PetsManager {
 
-    public Map<UUID, ArmorStand> pet;
-    private UUID uuid;
+    public final Map<UUID, ArmorStand> pet;
+    private final UUID uuid;
     private ArmorStand armorStand;
 
-    public PetsManager(){}
-
-    public PetsManager(Player player, Pets pets){
+    public PetsManager(Player player){
         this.pet = new HashMap<>();
         this.uuid = player.getUniqueId();
-        this.armorStand = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
+    }
 
-        Location location = player.getLocation();
+    public void execute(Pets pets){
+        Location location = this.getPlayer().getLocation();
 
+        this.armorStand = (ArmorStand) this.getPlayer().getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         ((CraftArmorStand) armorStand).getHandle().setLocation(location.getX() - 0.5, location.getY() + 0.7, location.getZ(), location.getYaw(), location.getPitch());
         this.armorStand.setCustomName(pets.getName());
         this.armorStand.setCustomNameVisible(true);
@@ -41,7 +41,7 @@ public class PetsManager {
         this.armorStand.setHelmet(CustomHead.create(pets.getHeadURL()));
         this.armorStand.setGravity(false);
         this.armorStand.setVisible(false);
-        this.pet.put(player.getUniqueId(), this.armorStand);
+        this.pet.put(this.uuid, this.armorStand);
     }
 
     public void destroy(PlayerInteractAtEntityEvent event){
@@ -80,5 +80,13 @@ public class PetsManager {
                 break;
             default: break;
         }
+    }
+
+    public boolean petIsSpawn(){
+        return this.pet.containsKey(this.getPlayer().getUniqueId());
+    }
+
+    public Player getPlayer(){
+        return Bukkit.getPlayer(this.uuid);
     }
 }
