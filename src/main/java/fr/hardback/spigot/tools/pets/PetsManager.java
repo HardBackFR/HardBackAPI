@@ -56,6 +56,7 @@ public class PetsManager {
 
     public void tp(PlayerMoveEvent event){
         if(event.getPlayer().getUniqueId() != uuid) return;
+        if(DirectionUtils.getPlayerDirection(event.getPlayer()) == null)return;
 
         Player player = event.getPlayer();
         Location location = player.getLocation();
