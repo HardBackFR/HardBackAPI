@@ -21,9 +21,11 @@ import java.util.UUID;
 
 public class PetsManager {
 
-    public final Map<UUID, ArmorStand> pet;
-    private final UUID uuid;
-    private final ArmorStand armorStand;
+    public Map<UUID, ArmorStand> pet;
+    private UUID uuid;
+    private ArmorStand armorStand;
+
+    public PetsManager(){}
 
     public PetsManager(Player player, Pets pets){
         this.pet = new HashMap<>();
@@ -44,6 +46,7 @@ public class PetsManager {
 
     public void destroy(PlayerInteractAtEntityEvent event){
         if(event.getRightClicked().getCustomName() == null) return;
+        if(!this.pet.containsKey(event.getPlayer().getUniqueId()))return;
 
         for(Pets pets : Pets.values()){
             if(event.getRightClicked().getCustomName().contains(pets.getName())) {
@@ -57,6 +60,7 @@ public class PetsManager {
     public void tp(PlayerMoveEvent event){
         if(event.getPlayer().getUniqueId() != uuid) return;
         if(DirectionUtils.getPlayerDirection(event.getPlayer()) == null)return;
+        if(!this.pet.containsKey(event.getPlayer().getUniqueId()))return;
 
         Player player = event.getPlayer();
         Location location = player.getLocation();
