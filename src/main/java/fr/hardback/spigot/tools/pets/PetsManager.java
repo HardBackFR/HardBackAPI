@@ -49,7 +49,7 @@ public class PetsManager {
 
         for(Pets pets : Pets.values()){
             if(event.getRightClicked().getCustomName().contains(pets.getName())) {
-                this.pet.remove(event.getRightClicked().getUniqueId());
+                this.pet.remove(event.getRightClicked().getUniqueId(), pets);
                 event.getRightClicked().remove();
                 new ParticleBuilder(ParticleEffect.EXPLOSION_HUGE, event.getRightClicked().getLocation()).setOffsetY(1f).setSpeed(0.1f).display();
             }

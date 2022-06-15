@@ -28,7 +28,7 @@ public class ColorUtils {
      * @return
      */
     public static DyeColor getRandomDyeColor() {
-        return ColorUtils.dyeColors[new Random().nextInt(16)];
+        return ColorUtils.dyeColors[new Random().nextInt(15)];
     }
 
     /*
@@ -74,7 +74,6 @@ public class ColorUtils {
                 DyeColor.YELLOW,
                 DyeColor.LIME,
                 DyeColor.PINK,
-                DyeColor.GRAY,
                 DyeColor.SILVER,
                 DyeColor.CYAN,
                 DyeColor.PURPLE,
