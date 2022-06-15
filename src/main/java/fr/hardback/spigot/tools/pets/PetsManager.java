@@ -21,7 +21,7 @@ import java.util.UUID;
 
 public class PetsManager {
 
-    public final Map<UUID, ArmorStand> pet;
+    public final Map<UUID, Pets> pet;
     private final UUID uuid;
     private ArmorStand armorStand;
 
