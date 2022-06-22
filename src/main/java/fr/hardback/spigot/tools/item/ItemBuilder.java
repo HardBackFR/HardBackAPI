@@ -143,13 +143,7 @@ public class ItemBuilder implements Cloneable {
     }
 
     public ItemBuilder setDyeColor(DyeColor color){
-        this.itemStack.setDurability(color.getData());
-        return this;
-    }
-
-    public ItemBuilder setWoolColor(DyeColor color){
-        if(!this.itemStack.getType().equals(Material.WOOL))return this;
-        this.itemStack.setDurability(color.getData());
+        this.itemStack.setDurability(color.getDyeData());
         return this;
     }
 

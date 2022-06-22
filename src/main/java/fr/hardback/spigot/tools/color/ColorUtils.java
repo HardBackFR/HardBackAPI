@@ -2,11 +2,10 @@ package fr.hardback.spigot.tools.color;
 
 import java.util.Random;
 
+import net.minecraft.world.item.EnumColor;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
-
-import net.minecraft.server.v1_8_R3.EnumColor;
 
 public class ColorUtils {
 
@@ -74,7 +73,6 @@ public class ColorUtils {
                 DyeColor.YELLOW,
                 DyeColor.LIME,
                 DyeColor.PINK,
-                DyeColor.SILVER,
                 DyeColor.CYAN,
                 DyeColor.PURPLE,
                 DyeColor.BLUE,
@@ -109,7 +107,6 @@ public class ColorUtils {
                 EnumColor.PINK,
                 EnumColor.PURPLE,
                 EnumColor.RED,
-                EnumColor.SILVER,
                 EnumColor.WHITE,
                 EnumColor.YELLOW
         };

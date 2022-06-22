@@ -1,6 +1,7 @@
 package fr.hardback.spigot.tools.head;
 
 import java.lang.reflect.Field;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.bukkit.Material;
@@ -14,11 +15,11 @@ import com.mojang.authlib.properties.PropertyMap;
 public class CustomHead {
 
     public static ItemStack create(String base64) {
-        ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
         ItemMeta headM = head.getItemMeta();
 
         try {
-            Field field = headM.getClass().getDeclaredField("profile");
+            Field field = Objects.requireNonNull(headM).getClass().getDeclaredField("profile");
             field.setAccessible(true);
 
             GameProfile profile = new GameProfile(UUID.randomUUID(), null);

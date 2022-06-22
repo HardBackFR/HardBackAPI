@@ -3,14 +3,14 @@ package fr.hardback.spigot.tools.pets;
 import fr.hardback.spigot.tools.DirectionUtils;
 import fr.hardback.spigot.tools.head.CustomHead;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftArmorStand;
+import org.bukkit.craftbukkit.v1_18_R2.entity.CraftArmorStand;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.util.Vector;
 import xyz.xenondevs.particle.ParticleBuilder;
 import xyz.xenondevs.particle.ParticleEffect;
 
@@ -34,7 +34,7 @@ public class PetsManager {
         Location location = this.getPlayer().getLocation();
 
         this.armorStand = (ArmorStand) this.getPlayer().getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
-        ((CraftArmorStand) armorStand).getHandle().setLocation(location.getX() - 0.5, location.getY() + 0.7, location.getZ(), location.getYaw(), location.getPitch());
+        this.setLocation(location.add(new Vector(-0.5, +0.7, 0)));
         this.armorStand.setCustomName(pets.getName());
         this.armorStand.setCustomNameVisible(true);
         this.armorStand.setSmall(true);
@@ -66,16 +66,16 @@ public class PetsManager {
 
         switch (Objects.requireNonNull(DirectionUtils.getPlayerDirection(player))){
             case NORTH:
-                ((CraftArmorStand) armorStand).getHandle().setLocation(location.getX() + 0.5, location.getY() + 0.7, location.getZ() + 0.5, location.getYaw(), location.getPitch());
+                this.setLocation(location.add(new Vector(+ 0.5, + 0.7, + 0.5)));
                 break;
             case EAST:
-                ((CraftArmorStand) armorStand).getHandle().setLocation(location.getX() - 0.5, location.getY() + 0.7, location.getZ() + 0.5, location.getYaw(), location.getPitch());
+                this.setLocation(location.add(new Vector(- 0.5, + 0.7, + 0.5)));
                 break;
             case WEST:
-                ((CraftArmorStand) armorStand).getHandle().setLocation(location.getX() + 0.5, location.getY() + 0.7, location.getZ() - 0.5, location.getYaw(), location.getPitch());
+                this.setLocation(location.add(new Vector(+ 0.5, + 0.7, - 0.5)));
                 break;
             case SOUTH:
-                ((CraftArmorStand) armorStand).getHandle().setLocation(location.getX() - 0.5, location.getY() + 0.7, location.getZ() - 0.5, location.getYaw(), location.getPitch());
+                this.setLocation(location.add(new Vector(- 0.5, + 0.7, - 0.5)));
                 break;
             default: break;
         }
@@ -83,6 +83,14 @@ public class PetsManager {
 
     public boolean petIsSpawn(){
         return this.pet.containsKey(this.getPlayer().getUniqueId());
+    }
+
+    private void setLocation(Location location){
+        this.armorStand.getLocation().setX(location.getX());
+        this.armorStand.getLocation().setY(location.getY());
+        this.armorStand.getLocation().setZ(location.getZ());
+        this.armorStand.getLocation().setYaw(location.getYaw());
+        this.armorStand.getLocation().setPitch(location.getPitch());
     }
 
     public Player getPlayer(){

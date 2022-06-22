@@ -59,7 +59,7 @@ public class TaskRenderImage extends BukkitRunnable {
                     map.setScale(MapView.Scale.FARTHEST);
                     map.addRenderer(new ImageMapRenderer(image.getSubimage(j * 128, i * 128, 128, 128)));
 
-                    mapIds.add(map.getId());
+                    mapIds.add((short) map.getId());
                 }
             }
 

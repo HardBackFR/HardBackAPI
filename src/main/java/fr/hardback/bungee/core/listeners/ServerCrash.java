@@ -24,11 +24,10 @@ public class ServerCrash implements Listener {
         final ProxiedPlayer player = event.getPlayer();
 
         if(player.getServer() != null){
-            if (!player.getServer().getInfo().getName().equalsIgnoreCase("hub1")) {
+            if (!player.getServer().getInfo().getName().equalsIgnoreCase("hub")) {
                 event.setCancelled(true);
-                this.instance.getProxy().getScheduler().schedule(this.instance, () -> player.connect(this.instance.getProxy().getServerInfo("hub1")), 1L, TimeUnit.MICROSECONDS);
+                this.instance.getProxy().getScheduler().schedule(this.instance, () -> player.connect(this.instance.getProxy().getServerInfo("hub")), 1L, TimeUnit.MICROSECONDS);
             }
-            player.disconnect(new TextComponent(HardBack.PREFIX + ChatColor.RED + "\nIl semblerait que le " + player.getServer().getInfo().getName() + "  ait crash !\n Merci de contacter un Administrateur !"));
             DiscordManager.send("Il semblerait que " + player.getServer().getInfo().getName() + " ait crash ! (Le serveur se relance)");
         }
     }
