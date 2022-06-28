@@ -22,32 +22,25 @@ public class CommandRank extends Command {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if(sender instanceof ProxiedPlayer){
-            final ProxiedPlayer player = (ProxiedPlayer) sender;
-            final AccountData account = DatabaseManager.REDIS.getAccountData(player.getUniqueId());
-            if(account.getRank().getPower() < RankUnit.Developpeur.getPower()){
-                MessageUtils.sendMessage(player, HardBack.PREFIX + ChatColor.RED + "Vous n'avez pas la permission d'éxecuter cette commande !");
-                return;
-            }
-        }
-
-        if(args.length != 2){
-            sender.sendMessage(new TextComponent(HardBack.PREFIX + ChatColor.RED + "/rank <joueur> <grade>"));
-            return;
+            if(DatabaseManager.REDIS.getAccountData(((ProxiedPlayer) sender).getUniqueId()).getRank().getPower() < RankUnit.Developpeur.getPower()) return;
         }
 
         final ProxiedPlayer target = ProxyServer.getInstance().getPlayer(args[0]);
-        final AccountData accountTarget = DatabaseManager.REDIS.getAccountData(target.getUniqueId());
 
         if(!target.isConnected()){
             sender.sendMessage(new TextComponent(HardBack.PREFIX + ChatColor.RED + "Ce joueur n'est pas connecté !"));
             return;
         }
 
+        final AccountData accountTarget = DatabaseManager.REDIS.getAccountData(target.getUniqueId());
         final RankUnit rank = RankUnit.getByName(args[1]);
 
         accountTarget.setRank(rank);
         DatabaseManager.REDIS.setAccountData(target.getUniqueId(), accountTarget);
-        MessageUtils.sendMessage(target, HardBack.PREFIX + ChatColor.RED+ "Vous n'avez pas la permission d'éxecuter cette commande !");
+
+        sender.sendMessage(new TextComponent(HardBack.PREFIX + ChatColor.GOLD + "Vous avez modifié le grade de " + ChatColor.BOLD + target.getName() + ChatColor.RESET + ChatColor.GOLD + " par " + rank.getPrefix()));
+        target.sendMessage(new TextComponent(HardBack.PREFIX + ChatColor.GREEN + "Votre grade a été mit à jour !"));
+
         DiscordManager.send(sender.getName() + " a changé le grade de " + target.getName() + " par " + rank.getName());
     }
 }

@@ -29,10 +29,11 @@ public class CommandMessage extends Command {
                 for (String arg : args) {
                     message.append(" ").append(arg);
                 }
-                MessageUtils.sendMessage(messager, ChatColor.GOLD+"« " + accountReceiver.getRank().getPrefix() + receiver.getName() + ChatColor.WHITE + " :" + message);
-                MessageUtils.sendMessage(receiver, ChatColor.GOLD+"» " + accountMessager.getRank().getPrefix() + messager.getName() + ChatColor.WHITE + " :" + message);
+                
+                MessageUtils.sendMessage(messager, ChatColor.YELLOW + "« " + accountReceiver.getRank().getPrefix() + receiver.getName() + ChatColor.WHITE + " :" + message);
+                MessageUtils.sendMessage(receiver, ChatColor.YELLOW + "» " + accountMessager.getRank().getPrefix() + messager.getName() + ChatColor.WHITE + " :" + message);
             } else {
-                MessageUtils.sendMessage((ProxiedPlayer) sender,ChatColor.RED+"Ce joueur n'est pas connecté !");
+                MessageUtils.sendMessage((ProxiedPlayer) sender,ChatColor.RED + "Ce joueur n'est pas connecté !");
             }
         }
     }
