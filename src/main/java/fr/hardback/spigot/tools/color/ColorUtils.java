@@ -19,7 +19,7 @@ public class ColorUtils {
      * @return
      */
     public static Color getRandomColor() {
-        return ColorUtils.colors[new Random().nextInt(15)];
+        return ColorUtils.colors[new Random().nextInt(17)];
     }
 
     /*
@@ -57,10 +57,12 @@ public class ColorUtils {
                 Color.LIME,
                 Color.MAROON,
                 Color.NAVY,
+                Color.OLIVE,
                 Color.ORANGE,
                 Color.PURPLE,
                 Color.RED,
                 Color.SILVER,
+                Color.TEAL,
                 Color.WHITE,
                 Color.YELLOW
         };
